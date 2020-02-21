@@ -68,7 +68,8 @@ function assigVars(data){
     if(i>1 && i%2==0){
       lib.push({
         lib: data[i],
-        book: data[i+1]
+        book: data[i+1],
+        total: 0
       });
       //bookId.push(data[i+1]);    
     }
@@ -83,13 +84,17 @@ function dataProc(){
     bookId: "" 
   };
   lib.forEach((l)=>{
-    // l = {total number of books, length of signup proc, books/day}
+    
+    for (var i = 0; i < l.book.length; i++) {
+      l.total += parseInt(l.book[i],10);
+    }
+
     if(tDaysS => l[1]){
       if(tDaysS => tmpTime){
         tmpTime += l.lib[1];
         libIdO.totalNoLib++ ;
         l.book.forEach((b)=>{
-          libIdO.bookId += b+" " 
+          libIdO.bookId += b+" ";
         });
       }
     }
@@ -116,7 +121,7 @@ function outptFormatter(){
 }
 
 process.argv.forEach(function (val, index, array) {
-  console.log(index + ': ' +val);
+  //console.log(index + ': ' +val);
   inputFileP = val;
   outputFileP = val+"_output.txt"
 });
@@ -124,7 +129,7 @@ process.argv.forEach(function (val, index, array) {
 readFile().then(()=>{
   var ddData = parseDataToArr(inputData);
   assigVars(ddData);
-  console.log(lib);
+  //console.log(lib);
   dataProc();
   outptFormatter();
 
